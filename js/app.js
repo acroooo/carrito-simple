@@ -5,6 +5,7 @@ const contenedorCarrito = document.querySelector('#lista-carrito tbody')
 const vaciarCarritoBtn = document.querySelector('#vaciar-carrito')
 let listaCurso = document.querySelector('#lista-cursos')
 let cursos = document.querySelectorAll('.card')
+let articulosCarro = []
 
 cargarEventListeners()
 function cargarEventListeners () {
@@ -17,7 +18,9 @@ function agregarCurso (e) {
     e.preventDefault()
     if (e.target.classList.contains('agregar-carrito')) {
         const datos = leerDatosCurso(e.target.parentElement.parentElement)
-        console.log(datos)
+        
+        // añade elementos al arreglo de carrito
+        articulosCarro = [...articulosCarro, datos]
     }
 }
 
