@@ -20,6 +20,10 @@ function agregarCurso (e) {
         
         // añade elementos al arreglo de carrito
         articulosCarro = [...articulosCarro, datos]
+
+
+
+        mostrarCarrito()
     }
 }
 
@@ -33,6 +37,26 @@ function leerDatosCurso (element) {
         id: element.querySelector('a').getAttribute('data-id')
     }
 
+    // revisar si un elemento ya existe en el carrito
+    const existe = articulosCarro.some(curso => curso.id === infoCurso.id);
+
+    if (existe) {
+        // ya existe en el carrito, hay que actualizar la cantidad
+        const cursos = articulosCarro.map(curso => {
+            if (curso.id === infoCurso.id) {
+                curso.cantidad++;
+                return curso; // retorna el objeto actualizado
+            }
+            else {
+                return curso; // retorna los objetos que no son duplicados
+            }
+        })
+        articulosCarro = [...cursos]
+    } else {
+        // añade elementos al arreglo de carrito
+        articulosCarro = [...articulosCarro, infoCurso]
+    }
+
     return infoCurso
 }
 
@@ -43,14 +67,19 @@ function mostrarCarrito() {
     // limpiar el html
     
     articulosCarro.forEach(curso => {
+        const { imagen, titulo, precio, cantidad, id } = curso
         const row = document.createElement('tr')
         row.innerHTML = `
             <td>
-                <img src="${curso.imagen}" width="100">
+                <img src="${imagen}" width="100">
             </td>
-            <td>${curso.titulo}</td>
-            <td>${curso.precio}</td>
-            <td>${curso.cantidad}</td>
+            <td>${titulo}</td>
+            <td>${precio}</td>
+            <td>${cantidad}</td>
+            
+            <td>
+                <a href="#" class="borrar-curso" data-id="${id}">X</a>
+            </td>
             `
         // agrega el html del carrito al tbody
         contenedorCarrito.appendChild(row)
