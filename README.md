@@ -4,7 +4,7 @@
 
 Link: https://taupe-bombolone-773a9e.netlify.app
 
-Un carrito simple con Javascript, que posee las siguientes funcionalidades:
+Un carrito simple para practicar DOM y características nuevas de Javascript, que posee las siguientes funcionalidades básicas:
 - Agregar un item al carro
 - Eliminar un item del carro
 - Mostrar items del carro
